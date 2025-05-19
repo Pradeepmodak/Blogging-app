@@ -4,7 +4,7 @@ const router=Router();
 router.get("/signin",(req,res)=>{
     return res.render("signin");
 });
-router.post("/signin",async (req,res)=>{
+router.post("/signin",async(req,res)=>{
    const {email,password}=req.body;
 try{
     const token=await User.matchPasswordAndGenerateToken(email,password);
@@ -15,6 +15,10 @@ try{
     });
 }
 });
+router.get("/logout",(req,res)=>{
+    console.log("Logout route called");
+    return res.clearCookie("token").redirect("/");
+})
 router.get("/signup",(req,res)=>{
     return res.render("signup");
 });
